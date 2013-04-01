@@ -12,6 +12,8 @@ lib/bundler/man
 pkg
 rdoc
 spec/reports
+spec/tmp
+spec/version_tmp
 test/tmp
 test/version_tmp
 tmp

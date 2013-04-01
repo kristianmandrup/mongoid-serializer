@@ -5,6 +5,8 @@ Will add `id` as an available attribute, which can be used as the primary key as
 
 Inspired by the discussion here: http://stackoverflow.com/questions/11571777/ember-data-and-mongodb-how-to-handle-id
 
+Note: Should work for Mongoid 3+
+
 ## Installation
 
 Add this line to your application's Gemfile:

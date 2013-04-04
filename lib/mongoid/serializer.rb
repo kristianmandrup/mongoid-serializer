@@ -22,6 +22,11 @@ module ActiveModel
     def id
       object._id
     end 
+
+    def status
+      return 204 if object.respond_to?(:destroyed?) && object.destroyed?
+      return 201 if object.respond_to?(:created?) && object.created?      
+    end
   end
 end
 
@@ -49,35 +54,4 @@ module ActiveModel::StateTracking
   def destroyed?
     @destroyed == true
   end
-end
-
-module JsonStatusCodeRender
-  def render(*args)
-    obj = args.first
-    if no_status? obj
-      if resource_was_destroyed? obj
-        # 204 : request was received and understood, but no need to send any data back
-        args.first[:status] = 204
-      elsif resource_was_created? obj
-        # 201 Created: The request has been fulfilled and resulted in a new resource
-        args.first[:status] = 201
-      end      
-    end
-
-    super
-  end
-
-  protected
-
-  def resource_was_destroyed? obj
-    obj[:json].respond_to?(:destroyed?) && obj[:json].destroyed?
-  end
-
-  def resource_was_created? obj
-    obj[:json].respond_to?(:created?) && obj[:json].created?
-  end
-
-  def no_status? obj
-    obj.key?(:json) && obj[:json].kind_of?(Mongoid::Document) && !obj.key?(:status)
-  end  
 end

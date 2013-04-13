@@ -9,6 +9,7 @@ module Mongoid
   end
 end
 
+
 module ActiveModel
   class StatusSerializer < Serializer
     def http_status
@@ -16,11 +17,16 @@ module ActiveModel
       return 201 if object.respond_to?(:created?) && object.created?      
     end
   end
+end
 
-  class MongoidSerializer < StausSerializer
+module ActiveModel
+  class MongoidSerializer < StatusSerializer
     def id
       object._id
     end
   end
 end
 
+if defined?(Mongoid)
+  Mongoid::Serializer.configure!
+end

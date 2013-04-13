@@ -22,6 +22,10 @@ Or install it yourself as:
     $ gem install mongoid-serializer
 
 
+## Config
+
+`Mongoid::Serializer.configure!`
+
 ## Usage
 
 ```ruby

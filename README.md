@@ -21,18 +21,12 @@ Or install it yourself as:
 
     $ gem install mongoid-serializer
 
-If the gem isn't activated automatically, you can add configuration in an initializer file, f.ex `mongoid_config.rb` 
-
-```ruby
-# mongoid_config.rb
-Mongoid::Serializer.configure!
-```
 
 ## Usage
 
 ```ruby
 class UserSerializer < ActiveModel::MongoidSerializer
-  attributes :id, :first_name, :last_name, :quote, :age
+  attributes :id, :first_name, :last_name, :quote, :age, http_status
 end
 ```
 
@@ -40,9 +34,9 @@ Additionally this gem includes a `ActiveModel::StateTracking` module. This modul
 
 You can either include this module in models of your choice, or include it into `Mongoid::Document` to make it part of every model. 
 
-For convenience, a method `Mongoid::Serializer.enable_state_tracking!` is made available to add state tracking to all Documents.
+`ActiveModel::StatusSerializer` is configured to try to hook into the `StateTracking` methods from [active_model-shaz](https://github.com/kristianmandrup/active_model-shaz) and set the JSON `http_status` key to either `201` or `204`, to reflect created or deleted state back to the client.
 
-`ActiveModel::MongoidSerializer` is configured to try to hook into the `StateTracking` methods and set the JSON `status:` key to either `201` or `204`, to reflect created or deleted state back to the client.
+`ActiveModel::MongoidSerializer` extends `ActiveModel::StatusSerializer` and sets the `id` attribute to point to `_id`,
 
 ## Contributing
 

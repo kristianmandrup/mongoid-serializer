@@ -22,7 +22,7 @@ end
 module ActiveModel
   class MongoidSerializer < StatusSerializer
     def id
-      object._id
+      object._id.to_s
     end
   end
 end

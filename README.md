@@ -5,6 +5,10 @@ Will add `id` as an available attribute, which can be used as the primary key as
 
 Inspired by the discussion here: http://stackoverflow.com/questions/11571777/ember-data-and-mongodb-how-to-handle-id
 
+Dependency: *active_model-shaz*
+
+[active_model-shaz](https://github.com/kristianmandrup/active_model-shaz)
+
 Note: Should work for Mongoid 3+
 
 ## Installation
